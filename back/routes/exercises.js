@@ -1,6 +1,7 @@
 const router = require('express').Router();
 let Exercise = require('../models/exercise.model');
 
+// refer to routes/users.js for refs.
 router.route('/').get((req, res) => {
     Exercise.find()
         .then(exercises => res.json(exercises))

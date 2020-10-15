@@ -3,6 +3,9 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
 
+const exerciseRouter = require('./routes/exercises');
+const userRouter = require('./routes/users');
+
 require('dotenv').config();
 
 const app = express();
@@ -19,9 +22,6 @@ connection.once('open', () => {
     console.log('MongoDB database connection established successfully ! ');
 })
 // .catch(console.log('err'));
-
-const exerciseRouter = require('./routes/exercises');
-const userRouter = require('./routes/users');
 
 app.use('/exercises', exerciseRouter);
 app.use('/users', userRouter);

@@ -1,12 +1,15 @@
 const router = require('express').Router();
 let User = require('../models/user.model');
 
+// find(): Returns all data present in this table, is a Promise
 router.route('/').get((req, res) => {
     User.find()
         .then(users => res.json(users))
         .catch(err => res.status(400).json('Error: ' + err));
 });
 
+// new User({...params}): adds a user for User model already created 
+// save(): returns a promise , handled accordingly
 router.route('/add').post((req, res) => {
     const username = req.body.username;
     const newUser = new User({ username });
