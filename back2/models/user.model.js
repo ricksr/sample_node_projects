@@ -9,7 +9,7 @@ const userSchema = new Schema({
         minlength: 3
     },
     email: {
-        type: email,
+        type: String,
         required: true,
         unique: true,
         trim: true,
@@ -24,7 +24,13 @@ const userSchema = new Schema({
         type: String,
         required: true,
         trim: true,
-    }
+    },
+    password: {
+        type: String,
+        required: true,
+        trim: true,
+        minlength: 5,
+    },
 }, {
     timestamps: true,
 });
