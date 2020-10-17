@@ -2,6 +2,7 @@ const router = require('express').Router();
 let User = require('../models/user.model');
 
 router.get('/register', (req, res) => {
+    
     const username = req.body.username;
     const name = req.body.name;
     const email = req.body.email;
@@ -19,6 +20,7 @@ router.get('/register', (req, res) => {
 });
 
 router.get('/login', (req, res) => {
+
     const username = req.body.username;
     const password = req.body.password;
 
