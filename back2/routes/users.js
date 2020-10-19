@@ -1,7 +1,8 @@
 const router = require('express').Router();
 let User = require('../models/user.model');
+const jwt = require('jsonwebtoken');
 
-router.get('/register', (req, res) => {
+router.post('/register', (req, res) => {
     
     const username = req.body.username;
     const name = req.body.name;
@@ -22,7 +23,7 @@ router.get('/register', (req, res) => {
 
 });
 
-router.get('/login', (req, res) => {
+router.post('/login', (req, res) => {
 
     const username = req.body.username;
     const password = req.body.password;
