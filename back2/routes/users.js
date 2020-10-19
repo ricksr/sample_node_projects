@@ -3,7 +3,7 @@ let User = require('../models/user.model');
 const jwt = require('jsonwebtoken');
 
 router.post('/register', (req, res) => {
-    
+
     const username = req.body.username;
     const name = req.body.name;
     const email = req.body.email;
@@ -14,7 +14,7 @@ router.post('/register', (req, res) => {
     if (password === reEnteredPassword) {
         const newUser = new User({ username, email, name, address, password });
         newUser.save()
-            .then(() => res.status(200).json('Success : ' + 'User added'))
+            .then(() => res.status(200).json([{ 'Success': 'User added' }]))
             .catch((err) => res.status(400).json('Error : ' + err));
     } else {
         res.status(400).json('Error : ' + 'Password mismatch')
@@ -44,7 +44,12 @@ router.post('/login', (req, res) => {
         User.findById({ userObjectId })
             .then(userInfo => {
                 if (userInfo.password === password) {
-                    res.status(200).json('Success : ' + 'loggedin');
+
+                    jwt.sign({ username }, 'secretkey', (err, token) => {
+                        token ? res.status(200).json([{ 'Success': true }, { 'token': token }])
+                            : res.status(400).json('Error : ' + err)
+                        // console.log('\n'+token+'\n');
+                    })
                 }
             })
             .catch(err => res.status(400).json('Error : ' + err));
