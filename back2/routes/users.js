@@ -15,8 +15,11 @@ router.get('/register', (req, res) => {
         newUser.save()
             .then(() => res.status(200).json('Success : ' + 'User added'))
             .catch((err) => res.status(400).json('Error : ' + err));
+    } else {
+        res.status(400).json('Error : ' + 'Password mismatch')
     }
-    res.status(400).json('Password mismatch')
+    res.status(400).json('Error : ' + 'Fill details properly')
+
 });
 
 router.get('/login', (req, res) => {
