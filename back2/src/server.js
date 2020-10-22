@@ -4,8 +4,8 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const jwt = require('jsonwebtoken');
 
-const homePage = require('./routes/index');
-const userPage = require('./routes/users');
+const homePage = require('./app/routes/index');
+const userPage = require('./app/routes/users');
 
 require('dotenv').config();
 
@@ -15,14 +15,7 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(bodyParser.json());
 
-const uri = process.env.ATLAS_URI;
-mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true });
-
-const connection = mongoose.connection;
-connection.once('open', () => {
-    console.log('MongoDB database connection established successfully ! ');
-})
-
+require("./config/mongoose.js")(app);
 
 app.use('/', homePage);
 app.use('/users', userPage);
