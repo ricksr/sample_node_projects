@@ -7,6 +7,7 @@ const app = express();
 app.use(morgan('dev'));
 app.use(cors());
 app.use(bodyParser.json());
+app.use('/files', express.static("files"));
 
 app.get('/', (req, res) => {
     require.json({
@@ -20,3 +21,4 @@ app.listen(port, () => {
 });
 
 require("./configs/mongoose.js")(app);
+require('./app/routeHandler')(app)
